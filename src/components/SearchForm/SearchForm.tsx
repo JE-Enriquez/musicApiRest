@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SearchInputs, SearchForms, SearchButon } from "./styled";
 
 type SearchBarProps = {
     
@@ -27,17 +28,17 @@ const SearchForm = ({onSearch}: SearchBarProps ) => {
     return(
         <>
             <div>
-                <form onSubmit={handleSubmit}>
-                    <input 
+                <SearchForms onSubmit={handleSubmit}>
+                    <SearchInputs 
                         type="text" 
                         name="buscar" 
                         id="buscar" 
                         value={inputValue}
                         onChange={(e) => handleInputChange(e)}
                     />
-                    <button type="submit">Buscar</button>
+                    <SearchButon type="submit">Buscar</SearchButon>
 
-                </form>
+                </SearchForms>
             </div>
         
         </>

@@ -1,4 +1,5 @@
 import React from "react"
+import { ButonDiv, ButonBtn, ButonH2 } from "./styled"
 
 type SearchTracksProps = {
     onSearch: () => void;
@@ -11,10 +12,10 @@ const TrackList = ({ onSearch}: SearchTracksProps) => {
     
     return (
         <>
-            <div>
-                <button type="button" onClick={onSearch}>Ver canciones</button>
-                <h2>Track List</h2>
-            </div>
+            <ButonDiv>
+                <ButonBtn type="button" onClick={onSearch}>Ver canciones</ButonBtn>
+                <ButonH2>Track List</ButonH2>
+            </ButonDiv>
         </>
     )
 

@@ -4,6 +4,7 @@ import useFetchResult from "../../Hooks/useFecthBuscar";
 import TrackList from "../TrackList/TrackList";
 import useFecthTracks from "../../Hooks/useFetchTracks";
 import { Link } from "react-router-dom";
+import { MusicSection, MusicImage, MusicArticle, MusicH2, MusicH3, MusicParaph, DetailFlags } from "./styled";
 
 
 
@@ -30,73 +31,81 @@ const Main = () => {
         setQueryTracks(textInput); // Dispara la búsqueda de canciones usando el texto guardado
     };
 
-    const renderLoading = () => <p>Cargando...</p>
-    const renderError = () => <p>Hubo un error al cargar los datos</p>
+    const renderLoading = () => <MusicParaph style={{textAlign: 'center', marginTop: '10px'}}>Cargando...</MusicParaph>
+    const renderError = () => <DetailFlags>Hubo un error al cargar los datos</DetailFlags>
     const renderMusic = () => {
 
-        if(!query) return <p>Ingresa un artista para buscar</p>;
-        if(music.length === 0) return <p>No se encontraron resultados para "{query}"</p>;
+        if(!query) return <MusicParaph style={{textAlign: 'center', marginTop: '10px'}}>Ingrsa un artista para buscar...</MusicParaph>;
+        if(music.length === 0) return <DetailFlags>No se encontraron resultados para "{query}"</DetailFlags>;
         
 
         return(
             
             <>
-                {isLoading && <p>Buscando en la base de datos...</p>}
-                {error && <p>{error}</p>}
-                <div>
+                {isLoading && <MusicParaph>Buscando en la base de datos...</MusicParaph>}
+                {error && <DetailFlags>{error}</DetailFlags>}
+                <MusicSection>
                     {
                         music.map(item  => {
                             const {idArtist, strArtist, strAlbumThumb, idAlbum, strAlbum} = item;
     
                             return(
-                                <div>
+                                <MusicArticle>
                                     <br/>
-                                    <img 
+                                    <MusicImage 
                                         src={strAlbumThumb} 
                                         alt="Album" />
-                                    <h2>ID: {idArtist}</h2>
-                                    <h3>Artista: {strArtist}</h3>
-                                    <p>Id del album: {idAlbum}</p>
-                                    <p>Nombre album: {strAlbum}</p>
+                                    <MusicH2>ID: {idArtist}</MusicH2>
+                                    <MusicH3>Artista: {strArtist}</MusicH3>
+                                    <MusicParaph>Id del album: {idAlbum}</MusicParaph>
+                                    <MusicParaph>Nombre album: {strAlbum}</MusicParaph>
                                     
-                                </div>
+                                </MusicArticle>
                             )
                         })
                     }
     
-                </div>
+                </MusicSection>
             </>
         )
     }
 
     const renderTracks = () =>{
 
-        if(!query) return <p>Presiona "Ver canciones" para mostrar la lista</p>;
-        if(tracks.length === 0) return <p>No se encontraron canciones para "{queryTracks}"</p>;
+        if(queryTracks !== query) return <MusicParaph style={{textAlign: 'center', marginTop: '10px'}}>Presiona "Ver canciones" para mostrar la lista</MusicParaph>;    
+        if(!queryTracks) return <MusicParaph style={{textAlign: 'center', marginTop: '10px'}}>Presiona "Ver canciones" para mostrar la lista</MusicParaph>;
+        if(tracks.length === 0) return <DetailFlags>No se encontraron canciones para "{queryTracks}"</DetailFlags>;
         
 
         return(
             
             <>
-                {isLoadingT && <p>Buscando en la base de datos...</p>}
-                {errorT && <p>{errorT}</p>}
-                <div>
+                {isLoadingT && <MusicParaph>Buscando en la base de datos...</MusicParaph>}
+                {errorT && <DetailFlags>{errorT}</DetailFlags>}
+                <section>
                     {
                         tracks.map(track => {
                             const {idTrack, strTrack, strMusicVid} = track;
                             return(
-                                <div>
-                                    <h2>Nombre cancion: {strTrack}</h2>
-                                    <p>ID cancion: {idTrack}</p>
-                                    <p>Link del video: {strMusicVid}</p>
-                                    <Link to={`/tracks/${idTrack}`}>Ver detalles de la cancion</Link>
-                                </div>
+                                <MusicArticle
+                                    style={{width: '500px'}}
+                                >
+                                    <MusicH2>Nombre cancion: {strTrack}</MusicH2>
+                                    <MusicParaph>ID cancion: {idTrack}</MusicParaph>
+                                    <MusicParaph>Link del video:</MusicParaph>
+                                    <MusicParaph>{strMusicVid}</MusicParaph>
+                                    <Link 
+                                        to={`/tracks/${idTrack}` }
+                                        style={{textDecoration: 'none', fontSize: '16px'}}
+                                        
+                                        >Ver detalles de la cancion</Link>
+                                </MusicArticle>
                             )
                             
                             
                         })
                     }
-                </div>
+                </section>
 
             </>
         )    
@@ -109,6 +118,14 @@ const Main = () => {
         return renderMusic();
     }
 
+    const renderContentT = () => {
+        if(isLoadingT) return renderLoading();
+        if(errorT) return renderError();
+        return renderTracks();
+    }
+
+
+
     return(
         <>
             <SearchForm onSearch={handleSearchMusic} />
@@ -119,7 +136,7 @@ const Main = () => {
             <TrackList onSearch={handleSearchTracks} />
 
             <div>
-                {renderTracks()}
+                {renderContentT()}
             </div>
 
 
