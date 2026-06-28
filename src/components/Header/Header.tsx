@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { HeadDiv, HeadHeder, HeadH2 } from "./styled"
 
 interface HeaderProps {
     appName: string;
@@ -12,11 +12,11 @@ const Header = ({appName} : HeaderProps ) => {
 
     return(
         
-            <div>
-                <header>
-                    <h2>{appName}</h2>
-                </header>
-            </div>
+            <HeadDiv>
+                <HeadHeder>
+                    <HeadH2>{appName}</HeadH2>
+                </HeadHeder>
+            </HeadDiv>
 
             
     );

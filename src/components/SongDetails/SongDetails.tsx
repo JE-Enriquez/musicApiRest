@@ -2,36 +2,39 @@
 import React from "react";
 import useFetchDetailsTrack from "../../Hooks/useFetchDetailsTrack";
 import { Link } from "react-router-dom";
+import { DetailSection, DetailH2, DetailH3, DetailParaph } from "./styled" 
 
 const SongDetails = () => {
     const { trackInfo, isLoadingDetail, errorDetail } = useFetchDetailsTrack();
 
-    if (isLoadingDetail) return <p>Buscando información de la canción...</p>;
-    if (errorDetail) return <p style={{ color: "red" }}>{errorDetail}</p>;
-    if (!trackInfo || trackInfo.length === 0) return <p>No hay información disponible.</p>;
+    if (isLoadingDetail) return <DetailParaph>Buscando información de la canción...</DetailParaph>;
+    if (errorDetail) return <DetailParaph style={{ color: "red" }}>{errorDetail}</DetailParaph>;
+    if (!trackInfo || trackInfo.length === 0) return <DetailParaph>No hay información disponible.</DetailParaph>;
 
     return (
-        <div>
+        <DetailSection>
             {
                 trackInfo.map(info => {
                     const {idTrack, strTrack, strArtist, strAlbum, strGenre, strMusicVid} = info;
 
                     return(
                         <>
-                            <h2>id: {idTrack} - Nombre: {strTrack}</h2>
-                            <h3>Artista: {strArtist}</h3>
-                            <p>Álbum: {strAlbum}</p>
-                            <p>Genero: {strGenre}</p>
-                            <p>{strMusicVid}</p>
+                            <DetailH2>id: {idTrack} - Nombre: {strTrack}</DetailH2>
+                            <DetailH3>Artista: {strArtist}</DetailH3>
+                            <DetailParaph>Álbum: {strAlbum}</DetailParaph>
+                            <DetailParaph>Genero: {strGenre}</DetailParaph>
+                            <DetailParaph>{strMusicVid}</DetailParaph>
 
-                            <Link to="/">Regresar al inicio</Link>
+                            <Link 
+                                to="/"
+                                style={{textDecoration: 'none'}}>Regresar al inicio</Link>
                         
                         
                         </>
                     )
                 })
             }
-        </div>
+        </DetailSection>
     );
 };
 
