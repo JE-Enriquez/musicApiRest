@@ -18,8 +18,16 @@ const HeadH2 = styled.h2`
     font-size: 40px;
 `;
 
+const MenuDIv = styled.div`
+    align-content: end;
+    justify-self: flex-end;
+    margin-right: 20px;
+
+`;
+
 export {
     HeadDiv,
     HeadHeder,
-    HeadH2
+    HeadH2,
+    MenuDIv
 }

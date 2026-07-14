@@ -63,8 +63,13 @@ const DetailFlags = styled.p<Error>`
             return 'red';
         }
 
-    }};
-`
+    }}
+`;
+
+const DetailButton = styled.button`
+    font-size: 14px;
+    width: 100px;
+`;
 
 
 export {
@@ -74,6 +79,7 @@ export {
     MusicH2,
     MusicH3,
     MusicParaph,
-    DetailFlags
+    DetailFlags,
+    DetailButton
     
 };
