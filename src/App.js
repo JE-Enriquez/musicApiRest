@@ -6,6 +6,7 @@ import SongDetails from "./components/SongDetails/SongDetails";
 import { ThemeProvider } from "styled-components";
 import GlobalStyled from "./components/theme/GlobalStyle.js";
 import Theme from "./components/theme/index";
+import Library from "./components/Library/Library";
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main/>} />
             <Route path="/tracks/:idTrack" element={<SongDetails />} />
+            <Route path="/Library" element={<Library/>} />
           </Routes>
           
           {/* <FetchMusic /> */}
