@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/index'; // Importa el tipo del Paso 1
 import { removeSong } from '../../redux/libraryActions'; // Acción para eliminar
 import { Link } from 'react-router-dom';
-import { MusicParaph, DetailButton } from '../Main/styled';
 import { Song } from "../../redux/libraryActions"
 import { LibraryContainer, LibraryTitle, LibraryVacio, LibraryTrack, LibraryCard, LibraryH2, LibraryId, BorrarContent, BorrarBoton } from './styles';
 
